@@ -23,8 +23,28 @@ const OK_RESPONSE: &str = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n
 const NOT_FOUND: &str = "HTTP/1.1 404 NOT FOUND\r\n\r\n";
 const INTERNAL_SERVER_ERROR: &str = "HTTP/1.1 500 INTERNAL SERVER ERROR\r\n\r\n";
 
-fn main(){
+fn main() {
+    //Set database
+    if let Err(e) = set_database() {
+        println!("Error: {}", e);
+        return;
+    }
 
+    //start server and print port
+    let listener = TcpListener::bind(format!("0.0.0.0:8080")).unwrap();
+    println!("Server started at port 8080");
+
+    //handle the client
+    for stream in listener.incoming() {
+        match stream {
+            Ok(stream) => {
+                handle_client(stream);
+            }
+            Err(e) => {
+                println!("Error: {}", e);
+            }
+        }
+    }
 }
 
 // this implement all requests
