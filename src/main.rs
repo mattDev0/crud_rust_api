@@ -150,3 +150,19 @@ fn handle_delete_request(request: &str) -> (String, String) {
         _ => (INTERNAL_SERVER_ERROR.to_string(), "Error".to_string()),
     }
 }
+
+//set_database function
+fn set_database() -> Result<(), PostgresError> {
+    //Connect to database
+    let mut client = Client::connect(DB_URL, NoTls)?;
+
+    //Create table
+    client.batch_execute(
+        "CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR NOT NULL,
+            email VARCHAR NOT NULL
+        )"
+    )?;
+    Ok(())
+}
