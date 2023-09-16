@@ -61,7 +61,7 @@ fn handle_client(mut stream: TcpStream) {
                 r if r.starts_with("GET /api/") => handle_get_request(r),
                 r if r.starts_with("GET /api") => handle_get_all_request(r),
                 r if r.starts_with("PUT /api/") => handle_put_request(r),
-                r if r.starts_with("DELETE //") => handle_delete_request(r),
+                r if r.starts_with("DELETE /api/") => handle_delete_request(r),
                 _ => (NOT_FOUND.to_string(), "404 Not Found".to_string()),
             };
 
