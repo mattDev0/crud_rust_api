@@ -56,16 +56,7 @@ Start your Rust application and PostgreSQL database using Docker Compose:
 docker-compose up rustapp
 ```
 
-The `-d` flag runs the containers in the background.
-
-### Step 4: Run Database Migrations
-After starting the containers, you need to run database migrations to create the necessary tables:
-
-```bash
-docker-compose exec rustapp diesel migration run
-```
-
-### Step 5: Testing Endpoints
+### Step 4: Testing Endpoints
 Now that your application is running, you can use Postman to test the endpoints.
 
 - Open Postman.
@@ -73,7 +64,7 @@ Now that your application is running, you can use Postman to test the endpoints.
 
 Remember to adapt the URLs and request types to match the specific endpoints you want to test based on your application's API design.
 
-### Step 6: Stop and Clean Up
+### Step 5: Stop and Clean Up
 To stop the containers and clean up, run:
 
 ```bash
